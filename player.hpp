@@ -3,9 +3,9 @@
 
 #include "entity.hpp"
 
-class PlayerController{
+class Player : public Entity{
     public:
-        PlayerController();
+        Player(int x, int y);
         
         
 
