@@ -11,9 +11,9 @@ add_library(
     map.hpp
 )
 add_library(
-    player_controller
-    player_controller.cpp
-    player_controller.hpp
+    player
+    player.cpp
+    player.hpp
 )
 add_library(
     entity
@@ -33,7 +33,7 @@ add_executable(UntitledProject main.cpp)
 target_link_libraries(
     UntitledProject
     map
-    player_controller
+    player
     ncurses
     entity
     monster
