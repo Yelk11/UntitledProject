@@ -1,6 +1,7 @@
 
 #include "entity.hpp"
 #include "map.hpp"
+Map *map = map->getInstance();
 
 Entity::Entity(char c, int x, int y)
 {
@@ -8,7 +9,7 @@ Entity::Entity(char c, int x, int y)
     myY = y;
     ch = c;
     isAlive = true;
-    m_attack = 1;
+    m_attack = 10;
     m_health = 20;
     m_defence = 5;
 }
@@ -16,32 +17,32 @@ Entity::Entity(char c, int x, int y)
 void Entity::walk(Direction dir)
 {
     Map *m = m->getInstance();
+
+    int tempX = myX;
+    int tempY = myY;
     switch (dir)
     {
     case NORTH:
-        if (m->isWalkable(myX, myY - 1))
-        {
-            myY--;
-        }
+        tempY--;
         break;
     case EAST:
-        if (m->isWalkable(myX + 1, myY))
-        {
-            myX++;
-        }
+        tempX++;
         break;
     case SOUTH:
-        if (m->isWalkable(myX, myY + 1))
-        {
-            myY++;
-        }
+        tempY++;
         break;
     case WEST:
-        if (m->isWalkable(myX - 1, myY))
-        {
-            myX--;
-        }
+        tempX--;
         break;
+    }
+    if (m->getEntity(tempX, tempY) != nullptr)
+    {
+        attack(m->getEntity(tempX, tempY));
+    }
+    else if (m->isWalkable(tempX, tempY))
+    {
+        myY = tempY;
+        myX = tempX;
     }
 }
 
@@ -57,6 +58,10 @@ int Entity::getY()
 
 char Entity::getChar()
 {
+    if (!isAlive)
+    {
+        return 'X';
+    }
     return ch;
 }
 
@@ -69,14 +74,15 @@ void Entity::takeDamage(int dmg)
 {
     m_health -= dmg;
 
-    if(m_health <= 0){
+    if (m_health <= 0)
+    {
         isAlive = false;
     }
 }
 
-void Entity::attack(Entity &entity)
+void Entity::attack(Entity *entity)
 {
-    entity.takeDamage(m_attack);
+    entity->takeDamage(m_attack);
 }
 
 void Entity::setTarget(Entity *target)

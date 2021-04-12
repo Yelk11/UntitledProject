@@ -49,6 +49,7 @@ int main(int, char **)
         case 'd':
             player.walk(Entity::EAST);
             break;
+        
         }
     }
 

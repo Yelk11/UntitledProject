@@ -4,7 +4,6 @@
 
 
 
-
 class Entity
 {
 
@@ -24,7 +23,7 @@ public:
     int getX();
     char getChar();
     virtual void takeDamage(int dmg);
-    virtual void attack(Entity& entity);
+    virtual void attack(Entity* entity);
     void setTarget(Entity* target);
     Entity* getTarget();
 private:
@@ -36,6 +35,7 @@ private:
     int m_defence;
     bool isAlive;
     Entity* m_target;
+    
 };
 
 #endif

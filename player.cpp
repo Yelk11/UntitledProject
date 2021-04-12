@@ -2,7 +2,7 @@
 
 
 Player::Player(int x, int y)
-:Entity('M', x, y){
+:Entity('@', x, y){
 
 }
 

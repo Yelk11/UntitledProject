@@ -61,3 +61,13 @@ bool Map::isWalkable(int x, int y)
 {
     return map[y][x] == ground;
 }
+
+Entity* Map::getEntity(int x, int y){
+    for (std::size_t i = 0; i < entityList.size(); ++i)
+    {
+        if(entityList[i]->getY() == y && entityList[i]->getX() == x){
+            return entityList[i];
+        }
+    }
+    return nullptr;
+}

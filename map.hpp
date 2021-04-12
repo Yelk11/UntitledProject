@@ -4,6 +4,8 @@
 #include <vector>
 #include "entity.hpp"
 
+
+
 class Map
 {
 
@@ -14,7 +16,7 @@ public:
     static Map *getInstance();
     void addEntity(Entity& entity);
     bool isWalkable(int x, int y);
-
+    Entity* getEntity(int x, int y);
 private:
     char map[31][92];
     std::vector<Entity*> entityList;
